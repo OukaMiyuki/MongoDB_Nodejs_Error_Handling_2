@@ -1,13 +1,13 @@
 const auth = require('../Middleware/auth');
-const asyncMiddleWare = require('../Middleware/errorAsync');
+const asyncMiddleWare = require('../Middleware/errorAsync'); //importing the middleware
 const { Manga, validate } = require('../Models/Manga');
 const { Genre } = require('../Models/Genre');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 
-router.get('/', auth,  asyncMiddleWare(
-        async (request, response, next) => {
+router.get('/', auth,  asyncMiddleWare( //here we calling the asyncMiddleWare from the middleware function in Middleware folder
+        async (request, response, next) => {//then inside the asyncMiddleWare, we passing async function as a reference or an argument, go to the errorAsync.js for further explanation
             const manga = await Manga.find().sort('name');
             response.send(manga);
         }
